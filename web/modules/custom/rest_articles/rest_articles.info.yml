@@ -1,0 +1,4 @@
+name: 'REST Articles'
+description: 'Module providing an endpoint for fetching articles.'
+type: module
+core_version_requirement: ^9

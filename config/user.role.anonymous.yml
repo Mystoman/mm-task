@@ -1,0 +1,27 @@
+uuid: 6fc2de85-dff7-4745-bad8-058f8d1a5175
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.restricted_html
+    - rest.resource.article_list
+  module:
+    - comment
+    - contact
+    - filter
+    - rest
+    - search
+    - system
+_core:
+  default_config_hash: 6WavjUYXIegP9AAg2zXGx54MWIVoomC3SZhNiqe-Dyk
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access site-wide contact form'
+  - 'restful get article_list'
+  - 'search content'
+  - 'use text format restricted_html'

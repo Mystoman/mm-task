@@ -111,8 +111,8 @@ class ArticleListResource extends ResourceBase {
     $image_style = $this->loadImageStyle();
 
     foreach ($this->loadArticleNodes() as $article) {
-      $tag = $article->tag();
-      $image = $article->image();
+      $tag = $article->getTag();
+      $image = $article->getImage();
 
       $this->addCacheableMetadataFromEntity($article);
       $this->addCacheableMetadataFromEntity($tag);
@@ -120,9 +120,9 @@ class ArticleListResource extends ResourceBase {
 
       $articles[] = [
         'id' => $article->id(),
-        'path' => $article->path(),
-        'title' => $article->label(),
-        'body' => $article->description(),
+        'path' => $article->getPath(),
+        'title' => $article->getTitle(),
+        'body' => $article->getDescription(),
         'image' => $this->applyImageStyle($image, $image_style),
         'tag' => $tag?->label(),
       ];

@@ -7,43 +7,59 @@ use Drupal\Core\Entity\EntityMalformedException;
 use Drupal\node\Entity\Node;
 
 /**
- * Wrapper class for nodes of "article" type.
+ * Wrapper class for nodes of "article" bundle.
  */
-class Article extends Node {
+class Article extends Node implements ArticleInterface {
 
   /**
-   * Value of a body field if there is one.
-   *
-   * @return string|null
+   * {@inheritdoc}
    */
-  public function description(): ?string {
+  public function getDescription(): ?string {
     return $this->get('body')->value;
   }
 
   /**
-   * Value of the image field if there is one.
-   *
-   * @return \Drupal\Core\Entity\EntityInterface|null
+   * {@inheritdoc}
    */
-  public function image(): ?EntityInterface {
+  public function setDescription($value): static {
+    $this->set('body', $value);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getImage(): ?EntityInterface {
     return $this->get('field_image')->entity;
   }
 
   /**
-   * Value of the tags field if there is one.
-   *
-   * @return \Drupal\Core\Entity\EntityInterface|null
+   * {@inheritdoc}
    */
-  public function tag(): ?EntityInterface {
+  public function setImage($fid): static {
+    $this->set('field_image', $fid);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getTag(): ?EntityInterface {
     return $this->get('field_tags')->entity;
   }
 
   /**
-   * Canonical URL address of the node.
-   *
-   * @return string|null
+   * {@inheritdoc}
    */
-  public function path(): ?string {
+  public function setTag($tid): static {
+    $this->set('field_tags', $tid);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPath(): ?string {
     try {
       return $this->toUrl()->toString(TRUE)->getGeneratedUrl();
     }

@@ -3,7 +3,7 @@
 use Drupal\rest_articles\Entity\Article;
 
 /**
- * Changes base class for node of article bundle.
+ * Changes base class for node of the "article" bundle.
  *
  * Implements hook_entity_bundle_info_alter().
  */

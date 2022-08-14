@@ -12,7 +12,6 @@ use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\file\FileInterface;
 use Drupal\image\ImageStyleInterface;
 use Drupal\rest\Plugin\ResourceBase;
-use Drupal\rest\ResourceResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -90,10 +89,10 @@ class ArticleListResource extends ResourceBase {
   /**
    * Returns article list as a JSON.
    *
-   * @return \Drupal\Core\Cache\CacheableJsonResponse|\Drupal\rest\ResourceResponse
+   * @return \Drupal\Core\Cache\CacheableJsonResponse
    *   Json response with articles.
    */
-  public function get(): CacheableJsonResponse|ResourceResponse {
+  public function get(): CacheableJsonResponse {
     $response = new CacheableJsonResponse($this->fetchArticles(), Response::HTTP_OK);
     $response->addCacheableDependency($this->cacheableMetadata);
 
@@ -134,7 +133,7 @@ class ArticleListResource extends ResourceBase {
   /**
    * Loads article node entities.
    *
-   * @return \Drupal\rest_articles\Entity\Article[]
+   * @return \Drupal\rest_articles\Entity\ArticleInterface[]
    */
   protected function loadArticleNodes(): array {
     try {
@@ -200,6 +199,7 @@ class ArticleListResource extends ResourceBase {
    * Adds cacheable metadata from the given entity.
    *
    * @param \Drupal\Core\Entity\EntityInterface|null $entity
+   *   Entity from which take cache data.
    */
   protected function addCacheableMetadataFromEntity(?EntityInterface $entity): void {
     if (!$entity) {
